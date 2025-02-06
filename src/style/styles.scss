@@ -1,11 +1,23 @@
-$bg-color:yellow;
-$bg-button:blue;
+// // @import "bootstrap/scss/bootstrap";
+
+// $bg-color:yellow;
+// $bg-button:blue;
+
+// // Variable overrides first
+// $primary: #900;
+// $enable-shadows: true;
+// $prefix: "mo-";
+
+// // Then import Bootstrap
+// // @use"../node_modules/bootstrap/scss/bootstrap";
 
 
-body{
-    background-color: $bg-color;
-}
 
-button{
-    color: $bg-button;
-}
+// body{
+//     background-color: $bg-color;
+// }
+
+// button{
+//     color: $bg-button;
+//     box-shadow: $enable-shadows;
+// }

@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // Perbaikan: Nama plugin yang benar
 
 module.exports = {
   entry: './src/main.js',
@@ -7,8 +9,8 @@ module.exports = {
   output: {
     filename: 'bundle.[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true, // Bersihkan folder dist sebelum build baru
-    assetModuleFilename: 'assets/[name][ext]', // Atur nama file untuk asset
+    clean: true,
+    assetModuleFilename: 'assets/[name][ext]',
   },
 
   module: {
@@ -21,22 +23,36 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env'],
           },
-        },
+        }, // Perbaikan: Hapus miniCssExtractPlugin.loader dari sini
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          // Perbaikan: Gunakan conditional loader untuk development dan production
+          process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+        ],
       },
       {
-        test: /\.scss$/, // Aturan untuk file SCSS
+        test: /\.scss$/,
         use: [
-          'style-loader', // Untuk development, gunakan MiniCssExtractPlugin.loader untuk production
+          // Perbaikan: Gunakan conditional loader untuk development dan production
+          process.env.NODE_ENV === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
-          'postcss-loader', // Untuk autoprefixer
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  autoprefixer, // Gunakan autoprefixer langsung, tidak perlu require di dalam options
+                ],
+              },
+            },
+          },
           'sass-loader',
         ],
       },
-       {
+      {
         test: /\.(png|svg|jpg|jpeg|gif|woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
       },
@@ -49,5 +65,9 @@ module.exports = {
       template: './src/index.html',
       inject: 'body',
     }),
+    // Perbaikan: Plugin hanya di production
+    ...(process.env.NODE_ENV === 'production' ? [new MiniCssExtractPlugin({
+      filename: 'styles.[contenthash].css',
+    })] : []),
   ],
 };

@@ -1,0 +1,14 @@
+// src/scss/styles.scss
+@import "~bootstrap/scss/functions"; // Import functions Bootstrap
+@import "~bootstrap/scss/variables"; // Import variables Bootstrap
+@import "~bootstrap/scss/mixins";   // Import mixins Bootstrap (optional, tapi sering dibutuhkan)
+
+// Kustomisasi variabel Bootstrap (jika diperlukan)
+$primary: #007bff; // Contoh: Mengubah warna primary Bootstrap
+
+@import "~bootstrap/scss/bootstrap";  // Import keseluruhan Bootstrap atau bagian-bagian yang dibutuhkan setelah functions dan variables.
+
+// CSS kustom Anda setelah import Bootstrap
+body {
+  background-color: $primary; // Contoh
+}
