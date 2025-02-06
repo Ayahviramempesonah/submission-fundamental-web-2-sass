@@ -1,7 +1,7 @@
 {
   "name": "submission-fundamental-web",
   "version": "1.0.0",
-  "description": "saya hanya ingin bintang 5 agar dapat melanjutkan program beasiswa ini hingga expert,mohon kiranya kritik dan saran dari reviewer untuk project ini,akan segera saya perbaiki",
+  "description": "Proyek web sederhana webpack+bootstrap+sass",
   "private": true,
   "scripts": {
     "start": "webpack serve --open --config webpack.dev.js",
@@ -31,6 +31,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "node-sass": "^9.0.0"
+    "sass": "^1.69.5" 
   }
 }
